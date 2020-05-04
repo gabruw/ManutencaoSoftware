@@ -30,7 +30,7 @@ public class LivroListBean extends ProcessReport implements Serializable {
     private List livros;
     private List livrosSelecionados;
     private List livrosFiltrados;
-    private Integer id;
+    private Long id;
 
     //construtor
     public LivroListBean() {
@@ -40,13 +40,15 @@ public class LivroListBean extends ProcessReport implements Serializable {
 
     //Métodos dos botões 
     public void record(ActionEvent actionEvent) {
-        msgScreen(new LivroDAO().persistir(livro));
+        new LivroDAO().persistir(livro);
+        msgScreen("Salvo com sucesso!");
         livros = new LivroDAO().buscarTodas();
     }
 
     public void exclude(ActionEvent actionEvent) {
         for (Object a: livrosSelecionados){
-            msgScreen(new LivroDAO().remover((Livro) a));
+            new LivroDAO().remover(livro.getId());
+            msgScreen("Removido com sucesso!");
         }
         livros = new LivroDAO().buscarTodas();
     }
@@ -55,7 +57,7 @@ public class LivroListBean extends ProcessReport implements Serializable {
         livro = new Livro();
     }
     
-    public void buscarPorId(Integer id) {
+    public void buscarPorId(Long id) {
         if (id == null) {
             throw new BusinessException("Insira um ID");
         }
@@ -95,11 +97,11 @@ public class LivroListBean extends ProcessReport implements Serializable {
         this.livrosFiltrados = livrosFiltrados;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
     

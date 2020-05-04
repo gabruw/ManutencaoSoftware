@@ -38,7 +38,7 @@ public class Assunto implements Serializable, Comparable<Assunto> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
     @Basic(optional = false)
     @Column(name = "assunto")
     private String assunto;
@@ -48,20 +48,20 @@ public class Assunto implements Serializable, Comparable<Assunto> {
     public Assunto() {
     }
 
-    public Assunto(Integer id) {
+    public Assunto(Long id) {
         this.id = id;
     }
 
-    public Assunto(Integer id, String assunto) {
+    public Assunto(Long id, String assunto) {
         this.id = id;
         this.assunto = assunto;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -113,3 +113,5 @@ public class Assunto implements Serializable, Comparable<Assunto> {
     }
     
 }
+
+

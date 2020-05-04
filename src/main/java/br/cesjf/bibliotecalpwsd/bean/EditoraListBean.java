@@ -30,7 +30,7 @@ public class EditoraListBean extends ProcessReport implements Serializable {
     private List editoras;
     private List editorasSelecionados;
     private List editorasFiltrados;
-    private Integer id;
+    private Long id;
 
     //construtor
     public EditoraListBean() {
@@ -40,14 +40,12 @@ public class EditoraListBean extends ProcessReport implements Serializable {
 
     //Métodos dos botões 
     public void record(ActionEvent actionEvent) {
-        msgScreen(new EditoraDAO().persistir(editora));
+        EditoraDAO.getInstance().persistir(editora);
         editoras = new EditoraDAO().buscarTodas();
     }
-
+    
     public void exclude(ActionEvent actionEvent) {
-        for (Object a: editorasSelecionados){
-            msgScreen(new EditoraDAO().remover((Editora) a));
-        }
+        EditoraDAO.getInstance().remover(editora.getId());
         editoras = new EditoraDAO().buscarTodas();
     }
     
@@ -55,7 +53,7 @@ public class EditoraListBean extends ProcessReport implements Serializable {
         editora = new Editora();
     }
     
-    public void buscarPorId(Integer id) {
+    public void buscarPorId(Long id) {
         if (id == null) {
             throw new BusinessException("Insira um ID");
         }
@@ -95,11 +93,11 @@ public class EditoraListBean extends ProcessReport implements Serializable {
         this.editorasFiltrados = editorasFiltrados;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
     

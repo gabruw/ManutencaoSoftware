@@ -31,7 +31,7 @@ public class EmprestimoListBean extends ProcessReport implements Serializable {
     private List emprestimos;
     private List emprestimosSelecionados;
     private List emprestimosFiltrados;
-    private Integer id;
+    private Long id;
 
     //construtor
     public EmprestimoListBean() {
@@ -41,22 +41,21 @@ public class EmprestimoListBean extends ProcessReport implements Serializable {
 
     //Métodos dos botões 
     public void record(ActionEvent actionEvent) {
-        msgScreen(new EmprestimoDAO().persistir(emprestimo));
-        emprestimos = new EmprestimoDAO().buscarTodas();
+        emprestimo.calculaDevolucaoPrevista();
+        new EmprestimoDAO().persistir(emprestimo);
+        msgScreen("Salvo com sucesso!");
     }
-
+    
     public void exclude(ActionEvent actionEvent) {
-        for (Object a: emprestimosSelecionados){
-            msgScreen(new EmprestimoDAO().remover((Emprestimo) a));
-        }
-        emprestimos = new EmprestimoDAO().buscarTodas();
+        new EmprestimoDAO().remover(emprestimo.getId());
+        msgScreen("Removido com sucesso!");
     }
     
     public void novo(ActionEvent actionEvent) {
         emprestimo = new Emprestimo();
     }
     
-    public void buscarPorId(Integer id) {
+    public void buscarPorId(Long id) {
         if (id == null) {
             throw new BusinessException("Insira um ID");
         }
@@ -96,11 +95,11 @@ public class EmprestimoListBean extends ProcessReport implements Serializable {
         this.emprestimosFiltrados = emprestimosFiltrados;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
     

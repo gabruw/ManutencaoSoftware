@@ -30,7 +30,7 @@ public class UsuarioListBean extends ProcessReport implements Serializable {
     private List usuarios;
     private List usuariosSelecionados;
     private List usuariosFiltrados;
-    private Integer id;
+    private Long id;
 
     //construtor
     public UsuarioListBean() {
@@ -40,13 +40,15 @@ public class UsuarioListBean extends ProcessReport implements Serializable {
 
     //Métodos dos botões 
     public void record(ActionEvent actionEvent) {
-        msgScreen(new UsuarioDAO().persistir(usuario));
+        new UsuarioDAO().persistir(usuario);
+        msgScreen("Salvo com sucesso!");
         usuarios = new UsuarioDAO().buscarTodas();
     }
 
     public void exclude(ActionEvent actionEvent) {
         for (Object a: usuariosSelecionados){
-            msgScreen(new UsuarioDAO().remover((Usuario) a));
+            new UsuarioDAO().remover(usuario.getId());
+            msgScreen("Removido com sucesso!");
         }
         usuarios = new UsuarioDAO().buscarTodas();
     }
@@ -55,7 +57,7 @@ public class UsuarioListBean extends ProcessReport implements Serializable {
         usuario = new Usuario();
     }
     
-    public void buscarPorId(Integer id) {
+    public void buscarPorId(Long id) {
         if (id == null) {
             throw new BusinessException("Insira um ID");
         }
@@ -95,11 +97,11 @@ public class UsuarioListBean extends ProcessReport implements Serializable {
         this.usuariosFiltrados = usuariosFiltrados;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
     

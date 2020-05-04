@@ -41,7 +41,7 @@ public class LivroFormBean implements Serializable {
     private List assuntos;
     private List autores;
     private List<Editora> editoras;
-    private int id;
+    private Long id;
     private UploadedFile uploadedFile;
     private final String diretorio;
 
@@ -69,13 +69,15 @@ public class LivroFormBean implements Serializable {
     //Métodos dos botões 
     public void record(ActionEvent actionEvent) {
         upload();
-        msgScreen(new LivroDAO().persistir(livro));
+        new LivroDAO().persistir(livro);
+        msgScreen("Salvo com sucesso!");
     }
     
     public void exclude(ActionEvent actionEvent) {
        delete(1);
        delete(2);
-       msgScreen(new LivroDAO().remover(livro));
+       new LivroDAO().remover(livro.getId());
+       msgScreen("Removido com sucesso!");
     }
 
     //getters and setters
@@ -87,11 +89,11 @@ public class LivroFormBean implements Serializable {
         this.livro = livro;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

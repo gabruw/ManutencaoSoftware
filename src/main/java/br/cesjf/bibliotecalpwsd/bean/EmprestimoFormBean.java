@@ -42,7 +42,7 @@ public class EmprestimoFormBean implements Serializable {
     private List<Usuario> usuarios;
     private Livro livro;
     private List<Livro> livros;
-    private int id;
+    private Long id;
 
     //construtor
     public EmprestimoFormBean() {
@@ -64,11 +64,13 @@ public class EmprestimoFormBean implements Serializable {
     //Métodos dos botões 
     public void record(ActionEvent actionEvent) {
         emprestimo.calculaDevolucaoPrevista();
-        msgScreen(new EmprestimoDAO().persistir(emprestimo));
+        new EmprestimoDAO().persistir(emprestimo);
+        msgScreen("Salvo com sucesso!");
     }
     
     public void exclude(ActionEvent actionEvent) {
-        msgScreen(new EmprestimoDAO().remover(emprestimo));
+        new EmprestimoDAO().remover(emprestimo.getId());
+        msgScreen("Removido com sucesso!");
     }
 
     //getters and setters
@@ -80,11 +82,11 @@ public class EmprestimoFormBean implements Serializable {
         this.emprestimo = emprestimo;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

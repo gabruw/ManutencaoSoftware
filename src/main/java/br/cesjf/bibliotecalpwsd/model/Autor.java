@@ -38,7 +38,7 @@ public class Autor implements Serializable, Comparable<Autor> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
     @Basic(optional = false)
     @Column(name = "nome")
     private String nome;
@@ -48,20 +48,20 @@ public class Autor implements Serializable, Comparable<Autor> {
     public Autor() {
     }
 
-    public Autor(Integer id) {
+    public Autor(Long id) {
         this.id = id;
     }
 
-    public Autor(Integer id, String nome) {
+    public Autor(Long id, String nome) {
         this.id = id;
         this.nome = nome;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

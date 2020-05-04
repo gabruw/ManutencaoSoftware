@@ -37,7 +37,7 @@ public class ReservaFormBean implements Serializable {
     
     private static final long serialVersionUID = 1L;
     private Reserva reserva;
-    private int id;
+    private Long id;
     private List<Exemplar> exemplaresPermitidos;
     private List<Usuario> usuariosPermitidos;
     private List<Livro> livros;
@@ -64,11 +64,13 @@ public class ReservaFormBean implements Serializable {
     //Métodos dos botões 
     public void record(ActionEvent actionEvent) {
         reserva.calculaDevolucaoPrevista();
-        msgScreen(new ReservaDAO().persistir(reserva));
+        new ReservaDAO().persistir(reserva);
+        msgScreen("Salvo com sucesso!");
     }
     
     public void exclude(ActionEvent actionEvent) {
-        msgScreen(new ReservaDAO().remover(reserva));
+        new ReservaDAO().remover(reserva.getId());
+        msgScreen("Removido com sucesso!");
     }
 
     //getters and setters
@@ -80,11 +82,11 @@ public class ReservaFormBean implements Serializable {
         this.reserva = reserva;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     

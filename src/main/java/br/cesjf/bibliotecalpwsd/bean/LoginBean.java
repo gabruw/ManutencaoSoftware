@@ -70,7 +70,7 @@ public class LoginBean extends AdminSession implements Serializable {
     
     public void login() throws IOException {        
         if (LoginDAO.login(usuario, senha)) {
-            Usuario u = UsuarioDAO.getInstance().buscar(usuario);
+            Usuario u = UsuarioDAO.getInstance().buscar(Long.valueOf(usuario));
             HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
             session.setAttribute("usuario", u);
             session.setAttribute("nome", u.getUsuario());

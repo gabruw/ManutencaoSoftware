@@ -26,12 +26,12 @@ public class AcervoListBean implements Serializable {
     
     private static final long serialVersionUID = 1L;
     private List<Livro> livros;
-    private Integer id;
+    private Long id;
     private String titulo;
 
     //construtor
     public AcervoListBean() {
-        livros = new LivroDAO().buscarTodas();
+        livros = new LivroDAO().buscarTodas(); 
     }
 
     //getters and setters
@@ -43,15 +43,15 @@ public class AcervoListBean implements Serializable {
         this.livros = livros;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
     
-    public void buscarPorId(Integer id) {
+    public void buscarPorId(Long id) {
         if (id == null) {
             throw new BusinessException("Insira um ID");
         }
@@ -72,7 +72,7 @@ public class AcervoListBean implements Serializable {
         if (titulo.equals("") || titulo == null) {
             throw new BusinessException("Insira um Título");
         }
-        livros = new LivroDAO().buscar(titulo);
+        livros = new LivroDAO().buscarNome(titulo);
         
         if(livros.isEmpty()) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso", "Não foram encontrados livros"));
@@ -83,7 +83,7 @@ public class AcervoListBean implements Serializable {
     }
     
     public void limpar() {
-        livros = new LivroDAO().buscar(titulo);
+        livros = new LivroDAO().buscarNome(titulo);
         this.id = null;
         this.titulo = null;
     }

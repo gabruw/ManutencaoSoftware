@@ -30,7 +30,7 @@ public class ExemplarListBean extends ProcessReport implements Serializable {
     private List exemplares;
     private List exemplaresSelecionados;
     private List exemplaresFiltrados;
-    private Integer id;
+    private Long id;
 
     //construtor
     public ExemplarListBean() {
@@ -40,13 +40,15 @@ public class ExemplarListBean extends ProcessReport implements Serializable {
 
     //Métodos dos botões 
     public void record(ActionEvent actionEvent) {
-        msgScreen(new ExemplarDAO().persistir(exemplar));
+        new ExemplarDAO().persistir(exemplar);
+        msgScreen("Salvo com sucesso!");
         exemplares = new ExemplarDAO().buscarTodas();
     }
 
     public void exclude(ActionEvent actionEvent) {
         for (Object a: exemplaresSelecionados){
-            msgScreen(new ExemplarDAO().remover((Exemplar) a));
+            new ExemplarDAO().remover(exemplar.getId());
+            msgScreen("Removido com sucesso!");
         }
         exemplares = new ExemplarDAO().buscarTodas();
     }
@@ -55,7 +57,7 @@ public class ExemplarListBean extends ProcessReport implements Serializable {
         exemplar = new Exemplar();
     }
     
-    public void buscarPorId(Integer id) {
+    public void buscarPorId(Long id) {
         if (id == null) {
             throw new BusinessException("Insira um ID");
         }
@@ -95,11 +97,11 @@ public class ExemplarListBean extends ProcessReport implements Serializable {
         this.exemplaresFiltrados = exemplaresFiltrados;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
     

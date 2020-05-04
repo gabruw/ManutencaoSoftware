@@ -45,7 +45,7 @@ public class Livro implements Serializable, Comparable<Livro> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
     @Basic(optional = false)
     @Column(name = "titulo")
     private String titulo;
@@ -83,11 +83,11 @@ public class Livro implements Serializable, Comparable<Livro> {
     public Livro() {
     }
 
-    public Livro(Integer id) {
+    public Livro(Long id) {
         this.id = id;
     }
 
-    public Livro(Integer id, String titulo, String isbn, int edicao, Integer ano) {
+    public Livro(Long id, String titulo, String isbn, int edicao, Integer ano) {
         this.id = id;
         this.titulo = titulo;
         this.isbn = isbn;
@@ -95,11 +95,11 @@ public class Livro implements Serializable, Comparable<Livro> {
         this.ano = ano;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

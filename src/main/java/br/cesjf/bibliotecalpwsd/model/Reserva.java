@@ -43,7 +43,7 @@ public class Reserva implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
     @Basic(optional = false)
     @Column(name = "dataReserva")
     @Temporal(TemporalType.DATE)
@@ -74,22 +74,22 @@ public class Reserva implements Serializable {
         this.cancelada = false;
     }
 
-    public Reserva(Integer id) {
+    public Reserva(Long id) {
         this.id = id;
         this.cancelada = false;
     }
 
-    public Reserva(Integer id, Date dataReserva) {
+    public Reserva(Long id, Date dataReserva) {
         this.id = id;
         this.dataReserva = dataReserva;
         this.cancelada = false;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -196,7 +196,7 @@ public class Reserva implements Serializable {
 
     @Override
     public String toString() {
-        return Integer.toString(id);
+        return Long.toString(id);
     }
     
 }

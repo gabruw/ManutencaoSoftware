@@ -33,7 +33,7 @@ public class ReservaListBean extends ProcessReport implements Serializable {
     private List<Reserva> reservas;
     private List reservasSelecionados;
     private List reservasFiltrados;
-    private Integer id;
+    private Long id;
 
     //construtor
     public ReservaListBean() {
@@ -63,13 +63,15 @@ public class ReservaListBean extends ProcessReport implements Serializable {
 
     //Métodos dos botões 
     public void record(ActionEvent actionEvent) {
-        msgScreen(new ReservaDAO().persistir(reserva));
+        new ReservaDAO().persistir(reserva);
+        msgScreen("Salvo com sucesso!");
         reservas = new ReservaDAO().buscarTodas();
     }
 
     public void exclude(ActionEvent actionEvent) {
         for (Object a: reservasSelecionados){
-            msgScreen(new ReservaDAO().remover((Reserva) a));
+            new ReservaDAO().remover(reserva.getId());
+            msgScreen("Removido com sucesso!");
         }
         reservas = new ReservaDAO().buscarTodas();
     }
@@ -78,7 +80,7 @@ public class ReservaListBean extends ProcessReport implements Serializable {
         reserva = new Reserva();
     }
     
-    public void buscarPorId(Integer id) {
+    public void buscarPorId(Long id) {
         if (id == null) {
             throw new BusinessException("Insira um ID");
         }
@@ -118,11 +120,11 @@ public class ReservaListBean extends ProcessReport implements Serializable {
         this.reservasFiltrados = reservasFiltrados;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
     
@@ -140,7 +142,7 @@ public class ReservaListBean extends ProcessReport implements Serializable {
         emp.setDataEmprestimo(new Date());
         emp.calculaDevolucaoPrevista();
         reserva.setIdEmprestimo(emp);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação", new ReservaDAO().persistir(reserva)));
+        //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informação", new ReservaDAO().persistir(reserva)));
         reservas = new ReservaDAO().buscarTodas();
     }
     

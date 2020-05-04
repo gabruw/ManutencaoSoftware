@@ -27,7 +27,7 @@ public class UsuarioFormBean implements Serializable {
     
     private static final long serialVersionUID = 1L;
     private Usuario usuario;
-    private int id;
+    private Long id;
     Map<String, String> tipos;
 
     //construtor
@@ -54,11 +54,13 @@ public class UsuarioFormBean implements Serializable {
 
     //Métodos dos botões 
     public void record(ActionEvent actionEvent) {
-        msgScreen(new UsuarioDAO().persistir(usuario));
+        new UsuarioDAO().persistir(usuario);
+        msgScreen("Salvo com sucesso!");
     }
     
     public void exclude(ActionEvent actionEvent) {
-        msgScreen(new UsuarioDAO().remover(usuario));
+        new UsuarioDAO().remover(usuario.getId());
+        msgScreen("Removido com sucesso!");
     }
 
     //getters and setters
@@ -70,11 +72,11 @@ public class UsuarioFormBean implements Serializable {
         this.usuario = usuario;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
     

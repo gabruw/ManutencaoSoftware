@@ -28,7 +28,7 @@ public class ExemplarFormBean implements Serializable {
     
     private static final long serialVersionUID = 1L;
     private Exemplar exemplar;
-    private int id;
+    private Long id;
     private List livros;
 
     //construtor
@@ -49,11 +49,13 @@ public class ExemplarFormBean implements Serializable {
 
     //Métodos dos botões 
     public void record(ActionEvent actionEvent) {
-        msgScreen(new ExemplarDAO().persistir(exemplar));
+        new ExemplarDAO().persistir(exemplar);
+        msgScreen("Salvo com sucesso!");
     }
     
     public void exclude(ActionEvent actionEvent) {
-        msgScreen(new ExemplarDAO().remover(exemplar));
+        new ExemplarDAO().remover(exemplar.getId());
+        msgScreen("Removido com sucesso!");
     }
 
     //getters and setters
@@ -65,11 +67,11 @@ public class ExemplarFormBean implements Serializable {
         this.exemplar = exemplar;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

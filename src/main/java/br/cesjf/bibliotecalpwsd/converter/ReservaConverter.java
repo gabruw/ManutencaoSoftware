@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package br.cesjf.bibliotecalpwsd.converter;
-
 import br.cesjf.bibliotecalpwsd.dao.ReservaDAO;
 import br.cesjf.bibliotecalpwsd.model.Reserva;
 import java.io.Serializable;
@@ -24,7 +23,7 @@ public class ReservaConverter implements Converter, Serializable {
     @Override
     public Object getAsObject(FacesContext arg0, UIComponent arg1, String id) {
         if (id != null && !id.isEmpty()) {
-            return (Reserva) new ReservaDAO().buscar(Integer.valueOf(id));
+            return (Reserva) new ReservaDAO().buscar(Long.valueOf(id));
         }
         return id;
     }
